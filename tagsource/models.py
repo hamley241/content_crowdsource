@@ -48,17 +48,11 @@ class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
-    #theme =["THEME","EMOTION","FEELING","BEHAVIOUR","REACTION","SMILEY","RESPONSE","GENERAL","OTHER","REGIONAL"]
     theme = models.CharField(max_length=20,default="NA")
     lang = models.CharField(max_length=20,default='NA')
 
     def __str__(self):
         return self.name
 
-    def change_lang(self,langua):
-        self.lang = langua
-        self.save()
-
-
-
-
+class StickerTag(Tag):
+    pass
