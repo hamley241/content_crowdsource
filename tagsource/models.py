@@ -5,8 +5,8 @@ import json
 
 
 class Sticker(models.Model):
-    name = models.CharField(max_length=40)
-    category = models.CharField(max_length=20)
+    name = models.CharField(max_length=40, null=False)
+    category = models.CharField(max_length=20, null=False)
     like = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     pub_date = models.DateTimeField('date added',auto_now_add=True, blank=True)
@@ -45,16 +45,20 @@ class Sticker(models.Model):
 
 class Tag(models.Model):
     sticker = models.ForeignKey(Sticker)
-    name = models.CharField(max_length=100 )
+    name = models.CharField(max_length=100, unique=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     #theme =["THEME","EMOTION","FEELING","BEHAVIOUR","REACTION","SMILEY","RESPONSE","GENERAL","OTHER","REGIONAL"]
     theme = models.CharField(max_length=20,default="NA")
     lang = models.CharField(max_length=20,default='NA')
+
     def __str__(self):
         return self.name
+
     def change_lang(self,langua):
         self.lang = langua
         self.save()
+
+
 
 
